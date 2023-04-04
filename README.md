@@ -28,6 +28,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webtspy'                       # ở đây
+    'app'                       # ở đây
 ]
 
