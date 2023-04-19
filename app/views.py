@@ -6,6 +6,9 @@ from .models import *
 from django.http import JsonResponse
 from django.core.serializers.json import DjangoJSONEncoder
 # import json
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from .models import TraSua
 
 # Create your views here.
 def login(request):
@@ -44,3 +47,13 @@ def view_check_login(request):
     # else {
     #     request.getRequestDispatcher("LoginFail.jsp").forward(request, response);
     # }
+
+class TraSuaList(ListView):
+    model = TraSua
+    context_object_name = 'trasuas'
+    template_name = 'app/TrasuaList.html'
+
+class TraSuaDetail(DetailView):
+    model = TraSua
+    context_object_name = 'trasua'
+    template_name = 'app/TrasuaDetail.html'

@@ -1,9 +1,3 @@
-<%@page import="Model.Bean.Trasua"%>
-<%@page import="Model.Bean.Admin"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,11 +56,11 @@
 </head>
 <body>
 	<div id="navbar">
-        <jsp:include page="Nav.jsp" ></jsp:include>
+        {% include "app\Nav.html" %}
     </div>
     <div id="main">
         <div id="sidebar">
-            <jsp:include page="Sidebar.jsp" ></jsp:include>
+            {% include "app\Sidebar.html" %}
         </div>
         <div id="content" style="background-image: url('image/BG.png');">
             <h4 style="width:100%;text-align:center;color:#007bff;margin-top:20px;">Danh sách trà sữa</h4>
@@ -83,23 +77,19 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
-	                    <%
-	                    ArrayList<Trasua> listTS = (ArrayList<Trasua>)request.getAttribute("listTS");
-	                    for (int i=0; i<listTS.size(); i++) {
-	                    %>
+	                    
+	                    
 	                    <tr>
-	                    	<td><%= listTS.get(i).getId() %></td>
-	                    	<td><%= listTS.get(i).getLoai() %></td>
-	                    	<td><%= listTS.get(i).getKichthuoc() %></td>
-	                    	<td><%= listTS.get(i).getGia() %></td>
+	                    	<td>1</td>
+	                    	<td>2</td>
+	                    	<td>3</td>
+	                    	<td>4</td>
 	                    	<td  class="session"> <a class="sessionAD" href="Trasua?update=<%=listTS.get(i).getId() %>"><button type="button" class="btn btn-primary">Update</button></a>
-	                    	<a class="sessionKH" href="Trasua?buy=<%=listTS.get(i).getId() %>"><button type="button" class="btn btn-primary" onclick="return confirm('Are you sure you want to buy?')">Buy</button></a></td>
+	                    	<td class="sessionKH" href="Trasua?buy=<%=listTS.get(i).getId() %>"><button type="button" class="btn btn-primary" onclick="return confirm('Are you sure you want to buy?')">Buy</button></td>
 	                   		<td class="sessionKH"> <input type="checkbox" name="<%= listTS.get(i).getId() %>" id="<%= listTS.get(i).getId() %>" 
 	                   		onclick="TongGia('<%= listTS.get(i).getGia() %>', '<%= listTS.get(i).getId() %>' )" /> </td>
 	                   	</tr>
-	                   	<% 
-	                   	}
-	                   	%>
+	                   	
 	                </tbody>        
 	            </table>
 	            <label for="tonggia" class="d-inline sessionKH">Tổng giá trị: </label>
@@ -110,17 +100,18 @@
         </div>
     </div>
 	<script>
-		var tong = parseInt(document.getElementById("tonggia").value); 
-        function TongGia(gia, id) {
-        	var checkbox = document.getElementById(id); 
-        	let gia2 = parseInt(gia); 
-        	if (checkbox.checked==true) {
-        		tong = tong + gia2;
-        	} else {
-        		tong = tong - gia2;
-        	}
-        	document.getElementById("tonggia").value = tong; 
-        }
+		// var tong = parseInt(document.getElementById("tonggia").value); 
+        // function TongGia(gia, id) {
+        // 	var checkbox = document.getElementById(id); 
+        // 	let gia2 = parseInt(gia); 
+        // 	if (checkbox.checked==true) {
+        // 		tong = tong + gia2;
+        // 	} else {
+        // 		tong = tong - gia2;
+        // 	}
+        // 	document.getElementById("tonggia").value = tong; 
+        // }
+
      </script>
 </body>
 </html>
