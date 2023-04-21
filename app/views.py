@@ -8,6 +8,8 @@ from django.core.serializers.json import DjangoJSONEncoder
 # import json
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView, CreateView, DeleteView
+from django.urls import reverse_lazy
 from .models import TraSua
 
 # Create your views here.
@@ -57,3 +59,23 @@ class TraSuaDetail(DetailView):
     model = TraSua
     context_object_name = 'trasua'
     template_name = 'app/TrasuaDetail.html'
+
+class TraSuaCreate(CreateView):
+    model = TraSua
+    fields = '__all__'
+    success_url = reverse_lazy('tra_sua_list')
+    template_name = 'app/TrasuaCreate.html'
+    context_object_name = 'trasuacreate'
+
+class TraSuaUpdate(UpdateView):
+    model = TraSua
+    fields = '__all__'
+    template_name = 'app/TrasuaCreate.html'
+    success_url = reverse_lazy('tra_sua_list')
+    context_object_name = 'trasuaupdate'
+
+class TraSuaDelete(DeleteView):
+    model = TraSua
+    context_object_name = 'trasua'
+    success_url = reverse_lazy('tra_sua_list')
+    template_name = 'app/TrasuaDelete.html'

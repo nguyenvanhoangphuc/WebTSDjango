@@ -65,6 +65,7 @@
         <div id="content" style="background-image: url('image/BG.png');">
             <h4 style="width:100%;text-align:center;color:#007bff;margin-top:20px;">Danh sách trà sữa</h4>
             <form action="Trasua?buyall=1" method="post">
+                <a href="{% url 'tra_sua_create'%}">Them tra sua</a>
 	            <table width='100%' class="table table-striped">
 	                <thead>
 	                    <tr>
@@ -78,18 +79,22 @@
 	                </thead>
 	                <tbody>
 	                    
-	                    
+	                    {% for trasua in trasuas %}
 	                    <tr>
-	                    	<td>1</td>
-	                    	<td>2</td>
-	                    	<td>3</td>
-	                    	<td>4</td>
-	                    	<td  class="session"> <a class="sessionAD" href="Trasua?update=<%=listTS.get(i).getId() %>"><button type="button" class="btn btn-primary">Update</button></a>
+	                    	<td>{{trasua.id}}</td>
+	                    	<td>{{trasua.title}}</td>
+	                    	<td>{{trasua.size}}</td>
+	                    	<td>{{trasua.price}}</td>
+	                    	<td  class="session"> <a class="sessionAD" href="{% url 'tra_sua_update' trasua.id %}"><button type="button" class="btn btn-primary">Update</button></a>
+                                <td  class="session"> <a class="sessionAD" href="{% url 'tra_sua_delete' trasua.id %}"><button type="button" class="btn btn-primary">Delete</button></a>
+                            <!-- <td><a href="{% url 'tra_sua' trasua.id %}">Update</a></td> -->
 	                    	<td class="sessionKH" href="Trasua?buy=<%=listTS.get(i).getId() %>"><button type="button" class="btn btn-primary" onclick="return confirm('Are you sure you want to buy?')">Buy</button></td>
 	                   		<td class="sessionKH"> <input type="checkbox" name="<%= listTS.get(i).getId() %>" id="<%= listTS.get(i).getId() %>" 
 	                   		onclick="TongGia('<%= listTS.get(i).getGia() %>', '<%= listTS.get(i).getId() %>' )" /> </td>
 	                   	</tr>
-	                   	
+                        {% empty %}
+                        <h3>No items in list</h3>
+                        {% endfor %}
 	                </tbody>        
 	            </table>
 	            <label for="tonggia" class="d-inline sessionKH">Tổng giá trị: </label>

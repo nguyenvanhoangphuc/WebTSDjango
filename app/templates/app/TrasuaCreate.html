@@ -37,27 +37,30 @@
         </div>
         <div id="content" style="background-image: url('image/BG.png');">
             <section class="container wrapper" >
-				<h2 class="display-6 pt-3">Cập nhật trà sữa</h2>
+                <a href="{% url 'tra_sua_list' %}">Go back</a>
+				<h2 class="display-6 pt-3">Thêm trà sữa</h2>
 				
-				<form action="Trasua?updateexecute=1" method="POST" style="width:50%;margin:auto" >
+				<!-- <form action="Trasua?updateexecute=1" method="POST" style="width:50%;margin:auto"> -->
+                <form action="" method="POST" style="width:50%;margin:auto">
+                    <!-- {% csrf_token %}
+					<input type="text" hidden required style="font-weight:bold" name="oldIDTS" id="oldIDTS" class="form-control" value="" >
 
-					<input type="text" hidden required style="font-weight:bold" name="oldIDTS" id="oldIDTS" class="form-control" value="<%= tsup.getId() %>" >
-
-                    <label for="IDTS">ID trà sữa</label>
-					<input type="text" disabled required style="font-weight:bold" name="IDTS" id="IDTS" class="form-control" value="<%= tsup.getId() %>" >
-					
-                    <label for="loai">Loại trà sữa</label>
-					<input type="text" required style="font-weight:bold" name="loai" id="loai" class="form-control" value="<%= tsup.getLoai() %>" >
+                    <label for="loai">Tên trà sữa</label>
+					<input type="text" required style="font-weight:bold" name="loai" id="loai" class="form-control" value="" >
 					
                     <label for="kichthuoc">Kích thước</label>
-					<input type="text" required style="font-weight:bold" name="kichthuoc" id="kichthuoc" class="form-control" value="<%= tsup.getKichthuoc() %>">
+					<input type="text" required style="font-weight:bold" name="kichthuoc" id="kichthuoc" class="form-control" value="">
 					
-					<label for="gia">Gía</label>
-					<input type="text" required style="font-weight:bold" name="gia" id="gia" class="form-control" value="<%= tsup.getGia() %>">
+					<label for="gia">Giá</label>
+					<input type="text" required style="font-weight:bold" name="gia" id="gia" class="form-control" value="">
                     <br>
 					
-                    <input type="submit" id="ok" class="btn btn-block btn-outline-primary" value="OK" >
-					<input type="reset" name="reset" id="res" class="btn btn-block btn-outline-primary" value="RESET">
+                    <input type="submit" id="ok" class="btn btn-block btn-outline-primary" value="Create" >
+					<input type="reset" name="reset" id="res" class="btn btn-block btn-outline-primary" value="RESET"> -->
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <input type="submit" value="Create">
+                    <input type="reset" value="Reset">
 				</form>
 			</section>
         </div>
