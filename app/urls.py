@@ -25,4 +25,8 @@ urlpatterns = [
     path('xoa_all_don_hang/', views.xoa_all_don_hang, name='xoa_all_don_hang'),
     path('thong_tin_khach_hang/', views.thong_tin_khach_hang, name='thong_tin_khach_hang'),
     path('khach_hang_update/', views.khach_hang_update, name='khach_hang_update'),
+    path('khach_hang_list/', views.khach_hang_list, name='khach_hang_list'),
+    path('xoa_khach_hang/<slug:khach_hang_id>/', views.xoa_khachhang, name='xoa_khach_hang'),
+    path('xoa_all_khach_hang/', views.xoa_all_khach_hang, name='xoa_all_khach_hang'),
+
 ]

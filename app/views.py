@@ -12,6 +12,7 @@ from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
 from .models import TraSua
 from .models import DonHang
+from .models import Account
 
 # Create your views here.
 def login(request):
@@ -162,3 +163,26 @@ def khach_hang_update(request):
     account.sdt = sdt
     account.save()
     return redirect('thong_tin_khach_hang')
+
+
+
+def khach_hang_list(request):  
+    context = { 'listKH': Account.objects.filter(roles="KH") }
+    return render(request, 'app\KhachhangList.html', context)
+    
+
+
+def xoa_khachhang(request , khach_hang_id):
+    khachhang = get_object_or_404(Account, username=khach_hang_id)
+    khachhang.delete()
+    return redirect('khach_hang_list')
+
+
+def xoa_all_khach_hang(request): 
+    if request.method == 'POST':
+        list_khach_hang = Account.objects.filter(roles="KH")
+        print(request.POST)
+        for khach_hang in list_khach_hang:
+            if (str(khach_hang.username) in request.POST.keys()):
+                khach_hang.delete()
+    return redirect('khach_hang_list')

@@ -1,9 +1,4 @@
-<%@page import="Model.Bean.Trasua"%>
-<%@page import="Model.Bean.Admin"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,46 +26,39 @@
         #navbar{
             position: fixed;top: 0;width: 100%;height: 180px;z-index: 10;
         }
-        <% if (request.getSession().getAttribute("account")==null) { %>
+        {% if 'account' not in request.session %}
         .session {
         	display: none !important;
         }	
-        <% } %>
-        <% 
-        if (request.getSession().getAttribute("account")!=null) {
-        	if (!((Admin) request.getSession().getAttribute("account")).getRoles().equals("KH")) {
-        %>
+        {% endif %}
+        {% if 'account' in request.session %}
+            {% if request.session.account == 'KH' %}
 		        .sessionKH {
 		        	display: none !important;
 		        }	
-        <% 
-        	}
-        } 
-        %>
-        <% 
-        if (request.getSession().getAttribute("account")!=null) {
-        	if (!((Admin) request.getSession().getAttribute("account")).getRoles().equals("AD")) {
-        %>
+            {% endif %}
+        {% endif %}
+        {% if 'account' in request.session %}
+            {% if request.session.account == 'AD' %}
 		        .sessionAD {
 		        	display: none !important;
 		        }	
-        <% 
-        	}
-        } 
-        %>
+            {% endif %}
+        {% endif %}
     </style>
 </head>
 <body>
 	<div id="navbar">
-        <jsp:include page="Nav.jsp" ></jsp:include>
+        {% include "app\Nav.html" %}
     </div>
     <div id="main">
         <div id="sidebar">
-            <jsp:include page="Sidebar.jsp" ></jsp:include>
+            {% include "app\Sidebar.html" %}
         </div>
         <div id="content" style="background-image: url('image/BG.png');">
             <h4 style="width:100%;text-align:center;color:#007bff;margin-top:20px;">Danh sách khách hàng</h4>
-            <form action="Khachhang?deleteall=1" method="post">
+            <form action="{% url 'xoa_all_khach_hang'%}" method="post">
+                {% csrf_token %}
 	            <table width='100%' class="table table-striped">
 	                <thead>
 	                    <tr>
@@ -85,27 +73,24 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
-	                    <%
-	                    ArrayList<Admin> listKH = (ArrayList<Admin>)request.getAttribute("listKH");
-	                    for (int i=0; i<listKH.size(); i++) {
-	                    %>
+                        {% for khachhang in listKH %}
+
 	                    <tr>
-	                    	<td><%= listKH.get(i).getUser() %></td>
-	                    	<td><%= listKH.get(i).getPass() %></td>
-	                    	<td><%= listKH.get(i).getFirstname()%></td>
-	                    	<td><%= listKH.get(i).getLastname() %></td>
-	                    	<td><%= listKH.get(i).getAddress() %></td>
-	                    	<td><%= listKH.get(i).getSdt() %></td>
+	                    	<td>{{khachhang.username}}</td>
+	                    	<td>{{khachhang.password}}</td>
+	                    	<td>{{khachhang.firstname}}</td>
+	                    	<td>{{khachhang.lastname}}</td>
+	                    	<td>{{khachhang.address}}</td>
+	                    	<td>{{khachhang.sdt}}</td>
 	                    	<td  class="session"> 
-	                    	<a class="sessionAD" href="Khachhang?delete=<%=listKH.get(i).getUser() %>"><button type="button" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete?')">Delete</button></a></td>
-	                   		<td class="sessionAD session"><input type="checkbox" name="<%= listKH.get(i).getUser() %>" /></td>
+	                    	    <a class="" href="{% url 'xoa_khach_hang' khachhang.username %}"><button type="button" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete?')">Delete</button></a></td>
+	                   		<td class=" session"><input type="checkbox" name="{{khachhang.username}}" /></td>
 	                   	</tr>
-	                   	<% 
-	                   	}
-	                   	%>
-	                </tbody>        
+	                   	{%endfor%}
+	                </tbody> 
+
 	            </table>
-	            <button type="submit" class="session btn btn-primary sessionAD" style="margin-left:auto;display:block;" 
+	            <button type="submit" class="session btn btn-primary" style="margin-left:auto;display:block;" 
 	            onclick="return confirm('Are you sure you want to delete all?')">Delete All</button>
             </form>
         </div>
