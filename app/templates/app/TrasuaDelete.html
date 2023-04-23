@@ -1,0 +1,6 @@
+<a href="{% url 'tra_sua_list' %}">Go back</a>
+<form method="POST">
+    {% csrf_token %}
+    <p>Bạn có muốn xoá loại trà sữa này không? "{{trasua}}"</p>
+    <input type="submit" value="Delete"/>
+</form>
