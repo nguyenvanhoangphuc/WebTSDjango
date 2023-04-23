@@ -21,25 +21,31 @@ def view_check_login(request):
     if request.method == 'POST': 
         username = request.POST.get('username')
         password = request.POST.get('password')
-        account = Account.objects.get(username=username, password= password)
+        try: 
+            account = get_object_or_404(Account, username=username, password=password)
+        except: 
+            return render(request, 'app\LoginFail.html', {})
+        # account = Account.objects.get(username=username, password= password)
         print(account,"-----------------------------------------------------------------")
-        # print("count", len(account))
         if (account is not None): 
-            serialized_account = {'username': account.username, 'password': account.password, 'roles': account.roles}
+            serialized_account = {'username': account.username, 'roles': account.roles}
             request.session['account'] = serialized_account
             if (account.roles == 'KH'):
                 # chuyển đển url tra_sua_list
                 return redirect('tra_sua_list')
-                # return render(request, 'app\TrasuaList.html')
             if (account.roles == 'AD'):
                 # chuyển đến url don_hang_list
                 return redirect('don_hang_list')
+        else: 
+            return render(request, 'app\LoginFail.html', {})
     else:
         return render(request, 'app\Login.html', {})    
 def logout(request):
     if 'account' in request.session:
         del request.session['account']
     return redirect('login')
+def dang_ki_tai_khoan(request): 
+    return render(request, 'app\Register.html')
 
 class TraSuaList(ListView):
     model = TraSua
@@ -136,3 +142,23 @@ def xoa_all_don_hang(request):
             if (str(don_hang.id) in request.POST.keys()):
                 don_hang.delete()
     return redirect('don_hang_list')
+
+def thong_tin_khach_hang(request):
+    context = { 'acc': Account.objects.get(username=request.session.get('account').get('username')) }
+    return render(request, 'app\KhachhangUpdate.html', context)
+
+def khach_hang_update(request): 
+    username = request.session.get('account').get('username')
+    password = request.POST.get('pass')
+    firstname = request.POST.get('firstname')
+    lastname = request.POST.get('lastname')
+    address = request.POST.get('address')
+    sdt = request.POST.get('sdt')
+    account = Account.objects.get(username=username)
+    account.password = password
+    account.firstname = firstname
+    account.lastname = lastname
+    account.address = address
+    account.sdt = sdt
+    account.save()
+    return redirect('thong_tin_khach_hang')

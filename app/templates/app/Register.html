@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,13 +28,13 @@
 </head>
 <body>
     <div id="navbar">
-        <jsp:include page="Nav.jsp"></jsp:include>
+        {% include "app\Nav.html" %}
     </div>
     <div id="main">
         <div id="sidebar">
-            <jsp:include page="Sidebar.jsp"></jsp:include>
+            {% include "app\Sidebar.html" %}
         </div>
-        <div id="content" style="background-image: url('image/BG.png');">
+        <div id="content" style="background-image: url('{% static "app/images/BG.png"%}');">
             <h4 style="width:100%;text-align:center;color:#007bff">Sign in</h4><hr>
             <div>
                 <section class="container wrapper" >

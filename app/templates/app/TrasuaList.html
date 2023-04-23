@@ -57,7 +57,7 @@
         </div>
         <div id="content" style="background-image: url('{% static "app/images/BG.png"%}');">
             <h4 style="width:100%;text-align:center;color:#007bff;margin-top:20px;">Danh sách trà sữa</h4>
-            <a href="{% url 'tra_sua_create'%}" class="btn btn-primary" style="position: absolute;margin:-35px 0 0 0;">Them tra sua</a>
+            <a href="{% url 'tra_sua_create'%}" class="session btn btn-primary" style="position: absolute;margin:-35px 0 0 0;">Them tra sua</a>
             <form action="{% url 'mua_all_tra_sua'%}" method="post">
                 {% csrf_token %}
 	            <table class="table table-striped" style='width: 100%;'>

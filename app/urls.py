@@ -8,6 +8,7 @@ urlpatterns = [
     path('', app.login, name = 'login'),
     path('check_login/', app.view_check_login, name='check_login'),
     path('logout/', app.logout, name='logout'),
+    path('dang_ki_tai_khoan/', app.dang_ki_tai_khoan, name='dang_ki_tai_khoan'),
     path('tra_sua_list/', TraSuaList.as_view(), name='tra_sua_list'),
     # path('mua_tra_sua/<int:pk>/', TraSuaDetail.as_view(), name='mua_tra_sua'),
     path('mua_tra_sua/<int:tra_sua_id>/', app.them_don_hang, name='mua_tra_sua'),
@@ -22,4 +23,6 @@ urlpatterns = [
     path('cap_nhat_don_hang/<int:don_hang_id>/', views.cap_nhat_don_hang, name='cap_nhat_don_hang'),
     path('xoa_don_hang/<int:don_hang_id>/', views.xoa_don_hang, name='xoa_don_hang'),
     path('xoa_all_don_hang/', views.xoa_all_don_hang, name='xoa_all_don_hang'),
+    path('thong_tin_khach_hang/', views.thong_tin_khach_hang, name='thong_tin_khach_hang'),
+    path('khach_hang_update/', views.khach_hang_update, name='khach_hang_update'),
 ]
