@@ -26,7 +26,7 @@ def view_check_login(request):
             if (account.roles == 'AD'):
                 # Lấy danh sách đơn hàng
                 context = { 'listDH': DonHang.objects.all() }
-                print(context)
+                # print(context)
                 return render(request, 'app\DonhangList.html', context)
     else:
         return render(request, 'app\Login.html', {})    

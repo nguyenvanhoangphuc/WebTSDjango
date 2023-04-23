@@ -11,6 +11,9 @@ Các lệnh tiếp theo tôi dùng để khởi tạo web python:
 django-admin startproject WebBanTS
 python manage.py migrate
 
+Các lần vào lại môi trường đã tạo thì chạy activate: 
+..\Phucenv\Scripts\activate
+
 Sau đó ta tạo một server ảo cho nó:    http://127.0.0.1:8888
 python manage.py runserver 8888
 
