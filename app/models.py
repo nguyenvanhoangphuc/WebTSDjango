@@ -11,9 +11,12 @@ class Account (models.Model):
     roles = models.CharField(max_length=10)
     
 class TraSua (models.Model): 
-    loai = models.TextField()
-    kichthuoc = models.CharField(max_length=1)
-    gia = models.IntegerField()
+    title = models.TextField()
+    size = models.CharField(max_length=1)
+    price = models.IntegerField()
+    
+    def __str__(self):
+        return self.title
     
 class DonHang (models.Model):
     idts = models.ForeignKey(TraSua, on_delete=models.CASCADE)

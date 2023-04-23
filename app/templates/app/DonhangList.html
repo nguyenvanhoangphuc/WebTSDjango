@@ -79,7 +79,7 @@
 						{% for donhang in listDH %}
 	                    <tr>
 							<td>{{ donhang.id }}</td>
-							{% with donhang.idts.loai|add:" "|add:donhang.idts.kichthuoc as tenTS %}
+							{% with donhang.idts.loai|add:" "|add:donhang.idts.size as tenTS %}
 	                    	<td>{{ tenTS }}</td>
 							{% endwith %}
 	                    	<td>{{ donhang.username.username }}</td>
