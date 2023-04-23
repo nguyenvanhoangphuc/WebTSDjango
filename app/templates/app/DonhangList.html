@@ -1,10 +1,4 @@
-{% comment %} <%@page import="Model.Bean.Donhang"%>
-<%@page import="Model.Bean.Trasua"%>
-<%@page import="Model.Bean.Admin"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%> {% endcomment %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,9 +55,10 @@
         <div id="sidebar">
             {% include "app\Sidebar.html" %}
         </div>
-        <div id="content" style="background-image: url('image/BG.png');">
+        <div id="content" style="background-image: url('{% static "app/images/BG.png"%}');">
             <h4 style="width:100%;text-align:center;color:#007bff;margin-top:20px;">Danh sách đơn hàng</h4>
-            <form action="Donhang?deleteall=1" method="post">
+            <form action="{% url 'xoa_all_don_hang'%}" method="post">
+                {% csrf_token %}
 	            <table width='100%' class="table table-striped">
 	                <thead>
 	                    <tr>
@@ -71,15 +66,15 @@
 	                        <th scope="col">ID Trà sữa</th>
 	                        <th scope="col">User khach hang</th>
 	                        <th scope="col">Tình trạng</th>
-	                        <th scope="col" class="session sessionAD">Action</th>
-	                        <th scope="col" class="session sessionAD">Choose</th>
+	                        <th scope="col" class="session sessionKH">Action</th>
+	                        <th scope="col" class="session sessionKH">Choose</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
 						{% for donhang in listDH %}
 	                    <tr>
 							<td>{{ donhang.id }}</td>
-							{% with donhang.idts.loai|add:" "|add:donhang.idts.size as tenTS %}
+							{% with donhang.idts.title|add:" "|add:donhang.idts.size as tenTS %}
 	                    	<td>{{ tenTS }}</td>
 							{% endwith %}
 	                    	<td>{{ donhang.username.username }}</td>
@@ -88,26 +83,30 @@
 	                    	{% else %}
 	                    	<td>chua giao</td>
 	                    	{% endif %}
-	                    	<td  class="session sessionAD"><a href="Donhang?chuyentt=<%=listDH.get(i).getIddh() %>"><button type="button" class="btn btn-primary" onclick="return confirm('Are you sure you want to chuyen?')">Chuyen TT</button></a>
-	                    	<a class="session sessionAD" href="Donhang?delete=<%=listDH.get(i).getIddh() %>"><button type="button" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete?')">Delete</button></a></td>
-	                   		<td class="session sessionAD"><input type="checkbox" name="<%= listDH.get(i).getIddh() %>" /></td>
+	                    	<td  class="session sessionKH">
+                                <a href="{% url 'cap_nhat_don_hang' donhang.id %}"><button type="button" class="btn btn-primary" onclick="return confirm('Are you sure you want to chuyen?')">Chuyen TT</button></a>
+	                    	    <a class="session sessionKH" href="{% url 'xoa_don_hang' donhang.id %}"><button type="button" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete?')">Delete</button></a>
+                            </td>
+	                   		<td class="session sessionKH"><input type="checkbox" name="{{donhang.id}}" /></td>
 	                   	</tr>
-	                   	{% endfor %}
+                        {% empty %}
+                           <h3>No items in list</h3>
+                        {% endfor %}
 	                </tbody>        
 	            </table>
-	            <button type="submit" class="session sessionAD btn btn-primary" style="margin-left:auto;display:block;" 
+	            <button type="submit" class="session sessionKH btn btn-primary" style="margin-left:auto;display:block;" 
 	            onclick="return confirm('Are you sure you want to delete all?')">Delete All</button>
             </form>
         </div>
     </div>
 	<script lang="javascript">
-         function TongGia(gia) {
-         	alert("ban da vao day");
-         	let tong = parseInt( document.getElementById("tonggia").value); 
-         	let gia = parseInt( gia); 
-         	tong = tong + gia;
-         	document.getElementById("tonggia").value = tong; 
-         }
+        function TongGia(gia) {
+        alert("ban da vao day");
+        let tong = parseInt( document.getElementById("tonggia").value); 
+        let gia = parseInt( gia); 
+        tong = tong + gia;
+        document.getElementById("tonggia").value = tong; 
+        }
      </script>
 </body>
 </html>

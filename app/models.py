@@ -16,7 +16,7 @@ class TraSua (models.Model):
     price = models.IntegerField()
     
     def __str__(self):
-        return self.title
+        return self.title + self.size
     
 class DonHang (models.Model):
     idts = models.ForeignKey(TraSua, on_delete=models.CASCADE)
