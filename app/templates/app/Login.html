@@ -1,5 +1,3 @@
-{% comment %} {%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%} {% endcomment %}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -70,7 +68,7 @@
                         <input type="password" minlength='6' maxlength='10' required name="password" id="password" class="form-control">
                         <br>
                         <input type="submit" class="btn btn-block btn-outline-primary" value="login">
-                        <a href="{% url 'check_login' %}"><input type="button" class="btn btn-block btn-outline-primary" style="margin-top:20px;" value="Sign in"></a>
+                        <a href="{% url 'dang_ki_tai_khoan' %}"><input type="button" class="btn btn-block btn-outline-primary" style="margin-top:20px;" value="Sign in"></a>
                     </form>
                 </section>
             </div>

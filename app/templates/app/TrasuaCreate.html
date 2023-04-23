@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,38 +30,35 @@
 </head>
 <body>
     <div id="navbar">
-        <jsp:include page="Nav.jsp" ></jsp:include>
+        {% include "app\Nav.html" %}
     </div>
     <div id="main">
         <div id="sidebar">
-            <jsp:include page="Sidebar.jsp" ></jsp:include>
+            {% include "app\Sidebar.html" %}
         </div>
-        <div id="content" style="background-image: url('image/BG.png');">
+        <div id="content" style="background-image: url('{% static "app/images/BG.png"%}');">
             <section class="container wrapper" >
                 <a href="{% url 'tra_sua_list' %}">Go back</a>
 				<h2 class="display-6 pt-3">Thêm trà sữa</h2>
-				
-				<!-- <form action="Trasua?updateexecute=1" method="POST" style="width:50%;margin:auto"> -->
-                <form action="" method="POST" style="width:50%;margin:auto">
-                    <!-- {% csrf_token %}
-					<input type="text" hidden required style="font-weight:bold" name="oldIDTS" id="oldIDTS" class="form-control" value="" >
+			
+                <form action="{% url 'tra_sua_create'%}" method="POST" style="width:50%;margin:auto" >
+
+                    {% csrf_token %}
+					<input type="text" hidden style="font-weight:bold" name="oldIDTS" id="oldIDTS" class="form-control" value="" >
 
                     <label for="loai">Tên trà sữa</label>
-					<input type="text" required style="font-weight:bold" name="loai" id="loai" class="form-control" value="" >
+					<input type="text" required style="font-weight:bold" name="title" id="title" class="form-control">
 					
                     <label for="kichthuoc">Kích thước</label>
-					<input type="text" required style="font-weight:bold" name="kichthuoc" id="kichthuoc" class="form-control" value="">
+					<input type="text" required style="font-weight:bold" name="size" id="size" class="form-control">
 					
 					<label for="gia">Giá</label>
-					<input type="text" required style="font-weight:bold" name="gia" id="gia" class="form-control" value="">
+					<input type="text" required style="font-weight:bold" name="price" id="price" class="form-control">
                     <br>
 					
-                    <input type="submit" id="ok" class="btn btn-block btn-outline-primary" value="Create" >
-					<input type="reset" name="reset" id="res" class="btn btn-block btn-outline-primary" value="RESET"> -->
-                    {% csrf_token %}
-                    {{form.as_p}}
-                    <input type="submit" value="Create">
-                    <input type="reset" value="Reset">
+                    <input type="submit" id="submit" class="btn btn-block btn-outline-primary" value="Create" />
+					<input type="reset" name="reset" id="reset" class="btn btn-block btn-outline-primary" value="RESET" />
+
 				</form>
 			</section>
         </div>
