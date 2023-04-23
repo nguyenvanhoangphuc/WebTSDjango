@@ -38,13 +38,14 @@
             <h4 style="width:100%;text-align:center;color:#007bff">Sign in</h4><hr>
             <div>
                 <section class="container wrapper" >
-                    <form action="Authentication?register=1" method="post" style="width:30%;margin:auto">
+                    <form action="{% url 'execute_dang_ki' %}" method="post" style="width:30%;margin:auto">
+                        {% csrf_token %}
                         <label for="username">Username</label>
                         <input type="text" required name="username" id="username" class="form-control">
                         <label for="password">Password</label>
                         <input type="password" required name="password" id="password" class="form-control">
-                        <label for="fisrtname">First Name</label>
-                        <input type="text" required name="fisrtname" id="fisrtname" class="form-control">
+                        <label for="firstname">First Name</label>
+                        <input type="text" required name="firstname" id="firstname" class="form-control">
                         <label for="lastname">Last Name</label>
                         <input type="text" required name="lastname" id="lastname" class="form-control">
                         <label for="address">Address</label>

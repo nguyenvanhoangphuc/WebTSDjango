@@ -9,6 +9,7 @@ urlpatterns = [
     path('check_login/', app.view_check_login, name='check_login'),
     path('logout/', app.logout, name='logout'),
     path('dang_ki_tai_khoan/', app.dang_ki_tai_khoan, name='dang_ki_tai_khoan'),
+    path('execute_dang_ki/', app.execute_dang_ki, name='execute_dang_ki'),
     path('tra_sua_list/', TraSuaList.as_view(), name='tra_sua_list'),
     # path('mua_tra_sua/<int:pk>/', TraSuaDetail.as_view(), name='mua_tra_sua'),
     path('mua_tra_sua/<int:tra_sua_id>/', app.them_don_hang, name='mua_tra_sua'),

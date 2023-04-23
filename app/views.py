@@ -47,6 +47,18 @@ def logout(request):
 def dang_ki_tai_khoan(request): 
     return render(request, 'app\Register.html')
 
+def execute_dang_ki(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        address = request.POST.get('address')
+        sdt = request.POST.get('sdt')
+        roles = 'KH'
+        Account.objects.create(username=username, password=password, firstname=firstname, lastname=lastname, address=address, sdt=sdt, roles=roles)
+    return redirect('tra_sua_list')
+
 class TraSuaList(ListView):
     model = TraSua
     context_object_name = 'trasuas'
